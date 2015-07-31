@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>This is Your SECRET page</h1>
+  <p>You Successfully Logged In</p>
+
+  <p>User Email:</p>
+  <%= @user.email %>
+  <p>Password: </p>
+  <%= @user.password %>
+  <p>User ID:</p>
+  <%= @user.id %>
+
+  <form action="/users/logout" method="post">
+    <input type="submit" value="Log Out">
+  </form>
+
+
+<br><br>
+
+  <form action = "/url/create" method="post">
+    <input type="submit" value="URL shortening!">
+  </form>
+
+
+  </div>

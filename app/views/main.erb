@@ -1,0 +1,114 @@
+<!-- ERROR MESSAGING -->
+<center><b>Message to User:</b></center>
+<% if !@msg.nil? %>
+<center><b><%= @msg %></b></center><br>
+<% end %>
+
+
+<!-- 1) SIGNING UP -->
+<% if session[:user_id].nil? %>
+<div class="container">
+  <h2>SIGNING UP</h2>
+  <form action="/users/create" method="post">
+    <br>
+    Email:
+    <br>
+    <input type="text" placeholder ="email" name="user[email]">
+    <br><br>
+    Password:
+    <br>
+    <input type="text" placeholder = "password" name="user[password]">
+    <br><br>
+    <input type="submit" value="Sign UP!">
+  </form>
+</div>
+<%end%>
+
+
+<!-- 2) LOGGING IN -->
+<% if session[:user_id].nil? %>
+<div class="container">
+<h2>LOGGING IN</h2>
+  <form action="/users/login" method="post">
+    <br>
+    Email:
+    <br>
+    <input type="text" placeholder ="email" name="user[email]">
+    <br><br>
+    Password:
+    <br>
+    <input type="text" placeholder = "password" name="user[password]">
+    <br><br>
+    <input type="submit" value="Log IN!">
+  </form>
+</div>
+<%end %>
+
+
+<!-- 3) LOGGING OUT -->
+<% if !session[:user_id].nil? %>
+<div class="container">
+<h2>Log Out!</h2>
+  <form action="/users/logout" method="post"><br/>
+    <input type="submit" value="Log OUT!">
+  </form>
+</div >
+<% end %>
+
+
+<!-- 4) URL Shortener -->
+<div class="container">
+  <h2>URL Link Shortener:</h2>
+  <form action = "/url/create" method="post">
+    <input type="text" name="url_input" placeholder="full link here">
+    <input type="submit" value="shorten it!">
+  </form>
+  <br>
+  <br>
+   <% if @url== true %> 
+    <% @url.errors.full_messages.each do |e| %>
+      <p><%= e %></p>
+    <% end %>
+  <% end %>
+
+
+
+
+<table>
+<!-- #first row -->
+<tr>
+<td> Long URL</td>
+<td> Short URL </td>
+<td> User ID </td>
+<td> Ref </td>
+</tr>
+
+  <% unless @urls.nil? %> 
+    <% @urls.each do |url| %>
+        
+        <tr>
+          <td><%= url.long_url %></td>      
+          <td><a href="<%= url.short_url %>"> <%= url.short_url %></a></td>
+          <td>
+            <% if url.user_id.nil? %>
+             !LOGIN
+            <% else %>
+            <%= url.user_id %>
+            <% end %>
+          </td>
+
+          <td>
+            <form action = "/url/<%=url.id%>/delete" method="post">
+            <input type="submit" value="delete">
+            </form>
+          </td>
+
+        </tr>
+    
+    <% end %>
+  <% end %>
+  </table>
+
+</div>
+
+
