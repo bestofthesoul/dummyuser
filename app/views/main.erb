@@ -73,8 +73,10 @@
 
 
 
+  <% unless @urls.nil? %> 
+    <% @urls.each do |url| %>
 
-<table>
+  <table>
 <!-- #first row -->
 <tr>
 <td> Long URL</td>
@@ -83,8 +85,6 @@
 <td> Ref </td>
 </tr>
 
-  <% unless @urls.nil? %> 
-    <% @urls.each do |url| %>
         
         <tr>
           <td><%= url.long_url %></td>      
@@ -105,10 +105,13 @@
 
         </tr>
     
-    <% end %>
-  <% end %>
+    
   </table>
+  <% end %>
+  <% end %>
+
 
 </div>
+
 
 

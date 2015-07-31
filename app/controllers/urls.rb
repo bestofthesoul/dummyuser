@@ -42,7 +42,7 @@ end
 
 
 post '/url/:url_id/delete' do
-   @user = User.find(session[:user_id]) 
+   # @user = User.find(session[:user_id]) 
     @url = Url.find(params[:url_id])
   @url.destroy
 
